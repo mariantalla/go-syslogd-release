@@ -1,0 +1,8 @@
+---
+name: go-syslogd
+
+dependencies:
+  - go
+
+files:
+  - go-syslogd/**/*.go

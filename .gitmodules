@@ -1,0 +1,3 @@
+[submodule "src/go-syslogd"]
+	path = src/go-syslogd
+	url = git@github.com:mariantalla/go-syslogd.git

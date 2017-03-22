@@ -1,0 +1,7 @@
+---
+name: go-syslogd
+templates:
+  ctl.sh.erb: bin/ctl.sh
+properties: {}
+
+packages: [go-syslogd]

@@ -1,0 +1,5 @@
+check process go-syslogd
+  with pidfile /var/vcap/sys/run/go-syslogd/go-syslogd.pid
+  start program "/var/vcap/jobs/go-syslogd/bin/ctl.sh start"
+  stop program "/var/vcap/jobs/go-syslogd/bin/ctl.sh stop"
+  group vcap
