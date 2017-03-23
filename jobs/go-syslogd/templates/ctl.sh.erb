@@ -1,8 +1,36 @@
 #!/bin/bash -e
 
+PATH=$PATH:/var/vcap/packages/go-syslogd/bin
+LOG_DIR=/var/vcap/sys/log/go-syslogd
+RUN_DIR=/var/vcap/sys/run/go-syslogd
+PIDFILE=$RUN_DIR/go-syslogd.pid
+
+
+source /var/vcap/packages/utils/utils.sh
+
+
+
 case $1 in
+
   start)
-    /var/vcap/jobs/go-syslogd/bin/go-syslogd-server
+    pid_guard $PIDFILE "Go syslogd"
+
+    mkdir -p $RUN_DIR $LOG_DIR
+    chown vcap:vcap $RUN_DIR $LOG_DIR
+
+    echo $$ > $PIDFILE
+
+    exec chpst -u vcap:vcap /var/vcap/packages/go-syslogd/bin/go-syslogd \
+      > >(tee -a $LOG_DIR/go-syslogd.stdout.log | logger -p local0.info ) \
+      2> >(tee -a $LOG_DIR/go-syslogd.stderr.log | logger -p local0.err )
+    ;;
+
+
+
   stop)
-    pkill go-syslogd-server
+    kill_and_wait $PIDFILE 55
+    ;;
+  *)
+    echo "Usage: ctl.sh {start|stop}"
+    ;;
 esac

@@ -4,4 +4,6 @@ templates:
   ctl.sh.erb: bin/ctl.sh
 properties: {}
 
-packages: [go-syslogd]
+packages:
+  - go-syslogd
+  - utils

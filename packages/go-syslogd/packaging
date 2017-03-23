@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-PACKAGE_NAME=github.com/st3v/go-syslogd
+PACKAGE_NAME=go-syslogd
 PACKAGE_DIR=${BOSH_INSTALL_TARGET}/src/${PACKAGE_NAME}
 
 mkdir -p $(dirname $PACKAGE_DIR)
@@ -11,7 +11,7 @@ export GOROOT=$(readlink -nf /var/vcap/packages/go)
 export GOPATH=$BOSH_INSTALL_TARGET:${PACKAGE_DIR}/vendor
 export PATH=$GOROOT/bin:$PATH
 
-go build ${PACKAGE_NAME}
+go install ${PACKAGE_NAME}
 
 # clean up source artifacts
 rm -rf ${BOSH_INSTALL_TARGET}/src ${BOSH_INSTALL_TARGET}/pkg

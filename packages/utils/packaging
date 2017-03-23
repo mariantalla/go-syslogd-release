@@ -1,0 +1,3 @@
+#!/bin/bash -e
+
+cp -a utils/* ${BOSH_INSTALL_TARGET}
